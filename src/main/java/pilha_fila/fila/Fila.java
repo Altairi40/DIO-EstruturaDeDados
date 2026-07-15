@@ -5,13 +5,14 @@ public class Fila {
     private No refNoEntradaFila = null;
 
 // Método que adiciona um novo Nó na fila
-    public void enqueue(No novoNo){
+    public void enqueue(Object obj){
+        No novoNo = new No(obj);
         novoNo.setRefNo(refNoEntradaFila);
         refNoEntradaFila = novoNo;
     }
 
     /* Método que remove o primeiro Nó da fila*/
-    public No dequeue(){
+    public Object dequeue(){
         if(!isEmpty()){
             No primeiroNo = refNoEntradaFila;
             No noAuxiliar = refNoEntradaFila; // Referência para dizer quem é o proximo a sair após a remoção do primeiro Nó
@@ -26,13 +27,13 @@ public class Fila {
                     break;
                 }
             }
-            return primeiroNo;
+            return primeiroNo.getObject();
         }
         return null;
     }
 
     /* Método que percorre a fila inteira, até chegar no primeiro Nó que foi adicionado*/
-    public No first(){
+    public Object first(){
         if(!isEmpty()){
             No primeiroNo = refNoEntradaFila;
             while(true){
@@ -42,7 +43,7 @@ public class Fila {
                     break; // Chegou no primeiro Nó, o loop se encerra
                 }
             }
-            return primeiroNo; // Retorna o primeiro Nó
+            return primeiroNo.getObject(); // Retorna o primeiro Nó
         }
         return null;
     }
