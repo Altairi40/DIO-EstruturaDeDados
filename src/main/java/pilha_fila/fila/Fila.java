@@ -1,18 +1,18 @@
 package pilha_fila.fila;
 
-public class Fila {
+public class Fila<T> {
 
-    private No refNoEntradaFila = null;
+    private No<T> refNoEntradaFila = null;
 
 // Método que adiciona um novo Nó na fila
-    public void enqueue(Object obj){
-        No novoNo = new No(obj);
+    public void enqueue(T object){
+        No novoNo = new No(object);
         novoNo.setRefNo(refNoEntradaFila);
         refNoEntradaFila = novoNo;
     }
 
     /* Método que remove o primeiro Nó da fila*/
-    public Object dequeue(){
+    public T dequeue(){
         if(!isEmpty()){
             No primeiroNo = refNoEntradaFila;
             No noAuxiliar = refNoEntradaFila; // Referência para dizer quem é o proximo a sair após a remoção do primeiro Nó
@@ -27,13 +27,13 @@ public class Fila {
                     break;
                 }
             }
-            return primeiroNo.getObject();
+            return (T) primeiroNo.getObject();
         }
         return null;
     }
 
     /* Método que percorre a fila inteira, até chegar no primeiro Nó que foi adicionado*/
-    public Object first(){
+    public T first(){
         if(!isEmpty()){
             No primeiroNo = refNoEntradaFila;
             while(true){
@@ -43,7 +43,7 @@ public class Fila {
                     break; // Chegou no primeiro Nó, o loop se encerra
                 }
             }
-            return primeiroNo.getObject(); // Retorna o primeiro Nó
+            return (T) primeiroNo.getObject(); // Retorna o primeiro Nó
         }
         return null;
     }
