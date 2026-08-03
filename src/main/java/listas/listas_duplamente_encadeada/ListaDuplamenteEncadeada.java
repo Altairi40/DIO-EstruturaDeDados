@@ -33,6 +33,30 @@ public class ListaDuplamenteEncadeada<T> {
         tamanhoLista++;
     }
 
+// Sobrecarga no método add(), adicionando um novo Nó no início, meio ou fim da lista através do índice
+    public void add(int index, T elemento){
+        NoDuplo<T> noAuxiliar = getNo(index); //Pega a referência do Nó no índice atual
+        NoDuplo<T> novoNo = new NoDuplo<>(elemento);
+        novoNo.setNoSeguinte(noAuxiliar); //Adiciona no noSeguinte do novoNo a referencia do Nó do índice atual
+
+// Verificador, para o caso do novoNo não for adicionado no final da lista
+        if (novoNo.getNoSeguinte() != null){
+            novoNo.setNoAnterior(noAuxiliar.getNoAnterior()); //Pega a referência do noAnterior do Nó atual no índice e adiciona no noAnterior do novoNo
+            novoNo.getNoSeguinte().setNoAnterior(novoNo); //Faz com que a referência de noAnterior do proximo Nó seja a do novoNo
+        }else{
+            novoNo.setNoAnterior(ultimoNo);
+            ultimoNo = novoNo;
+        }
+
+        if (index == 0){
+            primeiroNo = novoNo;
+        }else {
+            novoNo.getNoAnterior().setNoSeguinte(novoNo);
+        }
+
+        tamanhoLista++;
+    }
+
     public T get(int index){
         return this.getNo(index).getConteudo();
     }
