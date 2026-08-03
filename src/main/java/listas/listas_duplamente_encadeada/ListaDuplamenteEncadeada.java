@@ -57,6 +57,30 @@ public class ListaDuplamenteEncadeada<T> {
         tamanhoLista++;
     }
 
+// Método para remover um Nó da lista pelo index
+    public void remove(int index){
+        // Verificador, caso o Nó a ser removido seja o primeiro da lista
+        if (index == 0){
+            primeiroNo = primeiroNo.getNoSeguinte(); //Define o noSeguinte() como o novo primeiroNo()
+        }
+        // Verificador se a lista está ou não vazia, caso náo esteja, o noAnterior() do primeiroNo() é null
+        if (primeiroNo != null){
+            primeiroNo.setNoAnterior(null);
+        }else{
+            NoDuplo<T> noAuxiliar = getNo(index);
+            noAuxiliar.getNoAnterior().setNoSeguinte(noAuxiliar.getNoSeguinte()); // Pega o noAnterior() do index atual e define seu noSeguinte como o seguinte do Nó atual.
+
+            // Verificador, caso o Nó a ser removido não seja o último da lista, faz praticamente o mesmo que a operação acima, mas de forma inversa
+            if (noAuxiliar != ultimoNo){
+                noAuxiliar.getNoSeguinte().setNoAnterior(noAuxiliar.getNoAnterior());
+            }else {
+                ultimoNo = noAuxiliar;
+            }
+        }
+        this.tamanhoLista--;
+
+    }
+
     public T get(int index){
         return this.getNo(index).getConteudo();
     }
