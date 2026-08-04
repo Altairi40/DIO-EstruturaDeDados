@@ -66,7 +66,7 @@ public class ListaDuplamenteEncadeada<T> {
         // Verificador se a lista está ou não vazia, caso náo esteja, o noAnterior() do primeiroNo() é null
         if (primeiroNo != null){
             primeiroNo.setNoAnterior(null);
-        }else{
+        }
             NoDuplo<T> noAuxiliar = getNo(index);
             noAuxiliar.getNoAnterior().setNoSeguinte(noAuxiliar.getNoSeguinte()); // Pega o noAnterior() do index atual e define seu noSeguinte como o seguinte do Nó atual.
 
@@ -76,7 +76,7 @@ public class ListaDuplamenteEncadeada<T> {
             }else {
                 ultimoNo = noAuxiliar;
             }
-        }
+
         this.tamanhoLista--;
 
     }
@@ -97,5 +97,18 @@ public class ListaDuplamenteEncadeada<T> {
 // Método que retorna o tamanho atual da lista
     public int size(){
         return tamanhoLista;
+    }
+
+    @Override
+    public String toString() {
+        String strRetorno = "";
+        NoDuplo<T> noAuxiliar = primeiroNo;
+
+        for (int i =0; i < size(); i++){
+            strRetorno += "[Nó{conteúdo= " +  noAuxiliar.getConteudo() + "}]---->";
+            noAuxiliar = noAuxiliar.getNoSeguinte();
+        }
+        strRetorno += "null";
+        return strRetorno;
     }
 }
